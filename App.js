@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Button,
-  ScrollView,
+  FlatList,
   StyleSheet,
   Text,
   TextInput,
@@ -17,7 +17,10 @@ export default function App() {
   };
 
   const buttonHandler = () => {
-    setTodos((prevTodos) => [...prevTodos, enteredText]);
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: Math.random().toString(), text: enteredText },
+    ]);
   };
 
   return (
@@ -32,13 +35,17 @@ export default function App() {
       </View>
       <View style={styles.line}></View>
       <View style={styles.todoList}>
-        <ScrollView>
-          {todos.map((todo) => (
-            <View key={todo + Math.random()} style={styles.todoItem}>
-              <Text style={{ color: "white" }}>{todo}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={todos}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.todoItem}>
+                <Text style={{ color: "white" }}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );
