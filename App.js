@@ -26,7 +26,9 @@ export default function App() {
       <View style={styles.line}></View>
       <View style={styles.todoList}>
         {todos.map((todo) => (
-          <Text key={todo + Math.random()}>{todo}</Text>
+          <View key={todo + Math.random()} style={styles.todoItem}>
+            <Text style={{ color: "white" }}>{todo}</Text>
+          </View>
         ))}
       </View>
     </View>
@@ -60,5 +62,11 @@ const styles = StyleSheet.create({
   },
   todoList: {
     flex: 2,
+  },
+  todoItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: "#333",
   },
 });
