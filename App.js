@@ -3,13 +3,14 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
   const [enteredText, setEneteredText] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const textInputHandler = (e) => {
     setEneteredText(e);
   };
 
   const buttonHandler = () => {
-    console.log(enteredText);
+    setTodos((prevTodos) => [...prevTodos, enteredText]);
   };
 
   return (
@@ -24,7 +25,9 @@ export default function App() {
       </View>
       <View style={styles.line}></View>
       <View style={styles.todoList}>
-        <Text>TODOs...</Text>
+        {todos.map((todo) => (
+          <Text key={todo + Math.random()}>{todo}</Text>
+        ))}
       </View>
     </View>
   );
