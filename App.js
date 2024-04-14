@@ -1,11 +1,26 @@
+import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
+  const [enteredText, setEneteredText] = useState("");
+
+  const textInputHandler = (e) => {
+    setEneteredText(e);
+  };
+
+  const buttonHandler = () => {
+    console.log(enteredText);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder="Add new todo..." />
-        <Button title="ADD TODO" />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={textInputHandler}
+          placeholder="Add new todo..."
+        />
+        <Button onPress={buttonHandler} title="ADD TODO" />
       </View>
       <View style={styles.line}></View>
       <View style={styles.todoList}>
