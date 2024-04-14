@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   const [enteredText, setEneteredText] = useState("");
@@ -25,11 +32,13 @@ export default function App() {
       </View>
       <View style={styles.line}></View>
       <View style={styles.todoList}>
-        {todos.map((todo) => (
-          <View key={todo + Math.random()} style={styles.todoItem}>
-            <Text style={{ color: "white" }}>{todo}</Text>
-          </View>
-        ))}
+        <ScrollView>
+          {todos.map((todo) => (
+            <View key={todo + Math.random()} style={styles.todoItem}>
+              <Text style={{ color: "white" }}>{todo}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -61,7 +70,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
   todoList: {
-    flex: 2,
+    flex: 5,
   },
   todoItem: {
     margin: 8,
