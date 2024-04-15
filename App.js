@@ -13,6 +13,12 @@ export default function App() {
     ]);
   };
 
+  const deleteTodoHandler = (id) => {
+    setTodos((prevTodos) => {
+      return todos.filter((item) => item.id !== id);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <TodoInput onAddTodo={addTodoHandler} />
@@ -21,7 +27,13 @@ export default function App() {
         <FlatList
           data={todos}
           renderItem={(itemData) => {
-            return <TodoItem text={itemData.item.text} />;
+            return (
+              <TodoItem
+                text={itemData.item.text}
+                onDeleteTodo={deleteTodoHandler}
+                id={itemData.item.id}
+              />
+            );
           }}
           keyExtractor={(item) => item.id}
         />
