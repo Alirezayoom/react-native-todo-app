@@ -1,12 +1,6 @@
 import { useState } from "react";
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import TodoItem from "./components/TodoItem";
 
 export default function App() {
   const [enteredText, setEneteredText] = useState("");
@@ -38,11 +32,7 @@ export default function App() {
         <FlatList
           data={todos}
           renderItem={(itemData) => {
-            return (
-              <View style={styles.todoItem}>
-                <Text style={{ color: "white" }}>{itemData.item.text}</Text>
-              </View>
-            );
+            return <TodoItem text={itemData.item.text} />;
           }}
           keyExtractor={(item) => item.id}
         />
@@ -78,11 +68,5 @@ const styles = StyleSheet.create({
   },
   todoList: {
     flex: 5,
-  },
-  todoItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 8,
-    backgroundColor: "#333",
   },
 });
