@@ -2,18 +2,21 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 
 function TodoItem({ text, id, onDeleteTodo }) {
   return (
-    <Pressable onPress={() => onDeleteTodo(id)}>
-      <View style={styles.todoItem}>
-        <Text style={{ color: "white" }}>{text}</Text>
-      </View>
-    </Pressable>
+    <View style={styles.todoItem}>
+      <Pressable
+        android_ripple={{ color: "gray" }}
+        onPress={() => onDeleteTodo(id)}
+      >
+        <Text style={{ color: "white", padding: 8 }}>{text}</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   todoItem: {
+    overflow: "hidden",
     margin: 8,
-    padding: 8,
     borderRadius: 8,
     backgroundColor: "#333",
   },
