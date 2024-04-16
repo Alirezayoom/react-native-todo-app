@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 function TodoInput({ onAddTodo, onCancelTodo, isModalVisible }) {
   const [enteredText, setEneteredText] = useState("");
@@ -11,6 +18,12 @@ function TodoInput({ onAddTodo, onCancelTodo, isModalVisible }) {
   return (
     <Modal visible={isModalVisible} animationType="slide">
       <View style={styles.inputContainer}>
+        <View>
+          <Image
+            source={require("../assets/images/todo.png")}
+            style={{ width: 200, height: 100, marginBottom: 24 }}
+          />
+        </View>
         <TextInput
           style={styles.textInput}
           onChangeText={textInputHandler}
