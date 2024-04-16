@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
 
-function TodoInput({ onAddTodo }) {
+function TodoInput({ onAddTodo, onCancelTodo, isModalVisible }) {
   const [enteredText, setEneteredText] = useState("");
 
   const textInputHandler = (e) => {
@@ -9,35 +9,41 @@ function TodoInput({ onAddTodo }) {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={textInputHandler}
-        placeholder="Add new todo..."
-        value={enteredText}
-      />
-      <Button
-        onPress={() => {
-          onAddTodo(enteredText);
-          setEneteredText("");
-        }}
-        title="ADD TODO"
-      />
-    </View>
+    <Modal visible={isModalVisible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={textInputHandler}
+          placeholder="Add new todo..."
+          value={enteredText}
+        />
+        <View style={{ flexDirection: "row", gap: 16 }}>
+          <Button
+            onPress={() => {
+              onAddTodo(enteredText);
+              setEneteredText("");
+            }}
+            title="ADD TODO"
+          />
+          <Button onPress={onCancelTodo} title="Cancel" />
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 8,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   textInput: {
-    flex: 1,
+    width: "80%",
     padding: 8,
+    marginBottom: 8,
     borderWidth: 1,
     borderColor: "#ccc",
   },

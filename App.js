@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import TodoItem from "./components/TodoItem";
 import TodoInput from "./components/TodoInput";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const addTodoHandler = (enteredText) => {
     setTodos((prevTodos) => [
       ...prevTodos,
       { id: Math.random().toString(), text: enteredText },
     ]);
+    setIsModalVisible(false);
   };
 
   const deleteTodoHandler = (id) => {
@@ -21,9 +23,17 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <TodoInput onAddTodo={addTodoHandler} />
+      <Button onPress={() => setIsModalVisible(true)} title="Add New Todo" />
+      <TodoInput
+        isModalVisible={isModalVisible}
+        onAddTodo={addTodoHandler}
+        onCancelTodo={() => setIsModalVisible(false)}
+      />
       <View style={styles.line}></View>
       <View style={styles.todoList}>
+        {todos.length === 0 && (
+          <Text style={{ textAlign: "center" }}>Empty List!</Text>
+        )}
         <FlatList
           data={todos}
           renderItem={(itemData) => {
